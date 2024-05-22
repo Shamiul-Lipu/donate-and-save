@@ -1,13 +1,29 @@
 import Link from "next/link";
 import Container from "../Container/Container";
+import Image from "next/image";
+import bloodDlogo from "@/assets/bloodDlogo.png";
+import NavMenu from "./NavMenu";
 
 const Navbar = () => {
-  const auth = { user: "name" };
+  const auth = { user: null };
   return (
     <header className="bg-neutral">
       <Container>
         <nav className="navbar bg-neutral text-neutral-content">
           <div className="navbar-start">
+            <Link href={"/"} className="btn btn-ghost text-xl">
+              <Image src={bloodDlogo} width={50} height={50} alt="logo" />
+              <h3 className="text-cyan-200">
+                Donate<span className="text-red-400">&</span>Save
+              </h3>
+            </Link>
+          </div>
+          <div className="navbar-center hidden lg:flex">
+            <ul className="menu menu-horizontal px-1">
+              <NavMenu />
+            </ul>
+          </div>
+          <div className="navbar-end">
             <div className="dropdown ">
               <div
                 tabIndex={0}
@@ -31,54 +47,63 @@ const Navbar = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-black"
+                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-gray-700 -left-44 rounded-box w-52 text-gray-300  overflow-hidden"
               >
-                <li>
-                  <a>Item 1</a>
-                </li>
-                <li>
-                  <a>Parent</a>
-                  <ul className="p-2">
-                    <li>
-                      <a>Submenu 1</a>
-                    </li>
-                    <li>
-                      <a>Submenu 2</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a>Item 3</a>
-                </li>
+                <NavMenu />
               </ul>
             </div>
-            <a className="btn btn-ghost text-xl">daisyUI</a>
-          </div>
-          <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">
-              <li>
-                <a>Item 1</a>
-              </li>
-              <li>
-                <details>
-                  <summary>Parent</summary>
-                  <ul className="p-2">
-                    <li>
-                      <a>Submenu 1</a>
-                    </li>
-                    <li>
-                      <a>Submenu 2</a>
-                    </li>
-                  </ul>
-                </details>
-              </li>
-              <li>
-                <a>Item 3</a>
-              </li>
-            </ul>
-          </div>
-          <div className="navbar-end">
-            <a className="btn">Button</a>
+            {auth?.user ? (
+              <div className="dropdown dropdown-end">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle avatar"
+                >
+                  <div className="w-10 rounded-full">
+                    <Image
+                      width={35}
+                      height={35}
+                      alt="Tailwind CSS Navbar component"
+                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                    />
+                  </div>
+                </div>
+                <ul
+                  tabIndex={0}
+                  className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52 text-black"
+                >
+                  <li>
+                    <a className="justify-between">
+                      Profile
+                      <span className="badge">New</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>Settings</a>
+                  </li>
+                  <li>
+                    <a>Logout</a>
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <div>
+                {" "}
+                <Link
+                  href={"/register"}
+                  className="underline hover:underline hover:text-cyan-100"
+                >
+                  Register
+                </Link>
+                <span>{" / "}</span>
+                <Link
+                  href={"/login"}
+                  className=" hover:underline hover:text-cyan-100"
+                >
+                  Login
+                </Link>
+              </div>
+            )}
           </div>
         </nav>
       </Container>
