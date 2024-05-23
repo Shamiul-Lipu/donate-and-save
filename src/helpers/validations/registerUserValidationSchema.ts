@@ -5,6 +5,9 @@ export const registerUserValidationSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().min(1, "Email is required").email("Invalid email address"),
   password: z.string().min(1, "Password is required"),
+  gender: z.string().refine((val) => val === "male" || val === "female", {
+    message: "Gender is required",
+  }),
   bloodType: z.string().min(1, "Blood type is required"),
   location: z.string().min(1, "location is required"),
   division: z.string().min(1, "Division is required"),

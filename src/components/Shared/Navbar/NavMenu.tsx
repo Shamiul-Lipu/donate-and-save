@@ -5,12 +5,15 @@ import Link from "next/link";
 
 const NavMenu = () => {
   const pathname = usePathname();
+
   return (
     <>
       <li>
         <Link
           className={`link ${
-            pathname === "/" ? "text-cyan-200 font-semibold " : "no-underline"
+            pathname === "/"
+              ? "text-cyan-200 font-semibold focus:text-cyan-200"
+              : "no-underline text-gray-300 hover:underline"
           }`}
           href="/"
         >
@@ -21,8 +24,8 @@ const NavMenu = () => {
         <Link
           className={`link ${
             pathname === "/donor-list"
-              ? "text-cyan-200 font-semibold"
-              : "no-underline"
+              ? "text-cyan-200 font-semibold focus:text-cyan-200"
+              : "no-underline text-gray-300 hover:underline"
           }`}
           href="/donor-list"
         >
@@ -33,12 +36,12 @@ const NavMenu = () => {
         <Link
           className={`link ${
             pathname === "/about"
-              ? "text-cyan-200 font-semibold"
-              : "no-underline"
+              ? "text-cyan-200 font-semibold focus:text-cyan-200"
+              : "no-underline text-gray-300 hover:underline"
           }`}
           href="/about"
         >
-          About us
+          About Us
         </Link>
       </li>
     </>

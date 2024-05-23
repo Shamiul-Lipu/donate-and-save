@@ -14,6 +14,7 @@ import { registerUserValidationSchema } from "@/helpers/validations/registerUser
 import { loginUser } from "@/services/actions/loginUser";
 import { storeUserInfo } from "@/services/auth.services";
 import { useRouter } from "next/navigation";
+import { getRandomImageLink } from "@/utils/getRandomImageLink";
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -28,10 +29,12 @@ const RegisterPage = () => {
   });
 
   const onSubmit = async (payload: any) => {
+    payload.profileImage = getRandomImageLink(payload.gender);
     const id = toast.loading("Please wait...");
     try {
+      console.log(payload);
       const res = await registerUser(payload);
-      // console.log(res);
+      console.log(res);
       if (res?.data && res?.data?.id) {
         toast.update(id, {
           render: "User registered successfully",
@@ -157,6 +160,27 @@ const RegisterPage = () => {
                 {errors.password && (
                   <p className="text-red-500">
                     {errors.password.message?.toString()}
+                  </p>
+                )}
+              </div>
+              <div className="mb-6">
+                <label htmlFor="gender" className="block mb-2">
+                  Gender
+                </label>
+                <select
+                  id="gender"
+                  {...register("gender")}
+                  className={`w-full p-3 bg-[#030317] border ${
+                    errors.gender ? "border-red-500" : "border-white/20"
+                  } rounded-md focus:outline-none focus:border-indigo-500`}
+                >
+                  <option value="">Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+                {errors.gender && (
+                  <p className="text-red-500">
+                    {errors.gender.message?.toString()}
                   </p>
                 )}
               </div>
