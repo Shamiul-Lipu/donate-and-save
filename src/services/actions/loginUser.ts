@@ -1,5 +1,7 @@
 "use server";
 
+import setAccessToken from "./setAccessToken";
+
 export const loginUser = async (data: any) => {
   //   console.log(data);
 
@@ -16,5 +18,6 @@ export const loginUser = async (data: any) => {
   );
 
   const userInfo = await res.json();
+
   return userInfo;
 };

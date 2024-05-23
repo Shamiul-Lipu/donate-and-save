@@ -9,6 +9,8 @@ import { toast } from "react-toastify";
 import loginImage from "@/assets/login.svg";
 import bloodDlogo from "@/assets/bloodDlogo.png";
 import { loginUser } from "@/services/actions/loginUser";
+import { storeUserInfo } from "@/services/auth.services";
+import { useRouter } from "next/navigation";
 
 // Define the Zod schema for login form validation
 const loginValidationSchema = z.object({
@@ -22,6 +24,7 @@ type LoginFormValues = {
 };
 
 const LoginPage = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -36,13 +39,15 @@ const LoginPage = () => {
       // console.log(data);
       const res = await loginUser(data);
 
-      if (res?.data && res?.data?.id) {
+      if (res?.data?.accessToken) {
+        storeUserInfo({ accessToken: res?.data?.accessToken });
         toast.update(id, {
           render: "Login successful",
           type: "success",
           isLoading: false,
           autoClose: 2000,
         });
+        router.push("/");
       } else {
         toast.update(id, {
           render: "Invalid email or password",

@@ -11,8 +11,12 @@ import { registerUser } from "@/services/actions/registerUser";
 import { toast } from "react-toastify";
 import { location } from "../constants/location";
 import { registerUserValidationSchema } from "@/helpers/validations/registerUserValidationSchema";
+import { loginUser } from "@/services/actions/loginUser";
+import { storeUserInfo } from "@/services/auth.services";
+import { useRouter } from "next/navigation";
 
 const RegisterPage = () => {
+  const router = useRouter();
   const [selectedlocation, setSelectedlocation] = useState<string>("");
   const [divisions, setDivisions] = useState<string[]>([]);
   const {
@@ -23,10 +27,10 @@ const RegisterPage = () => {
     resolver: zodResolver(registerUserValidationSchema),
   });
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (payload: any) => {
     const id = toast.loading("Please wait...");
     try {
-      const res = await registerUser(data);
+      const res = await registerUser(payload);
       // console.log(res);
       if (res?.data && res?.data?.id) {
         toast.update(id, {
@@ -35,6 +39,14 @@ const RegisterPage = () => {
           isLoading: false,
           autoClose: 2000,
         });
+        const result = await loginUser({
+          email: payload.email,
+          password: payload.password,
+        });
+        if (result?.data?.accessToken) {
+          storeUserInfo({ accessToken: result?.data?.accessToken });
+          router.push("/dashboard");
+        }
       } else {
         toast.update(id, {
           render: "Failed to register user",
