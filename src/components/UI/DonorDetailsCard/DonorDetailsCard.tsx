@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const DonorDetailsCard = ({ donor }: any) => {
@@ -41,9 +42,12 @@ const DonorDetailsCard = ({ donor }: any) => {
           Address: {donor?.location} , {donor?.division} ,{donor?.address}
         </p>
         <div className="card-actions justify-end">
-          <button className="btn btn-accent text-gray-600">
+          <Link
+            href={`/donor-list/${donor.id}`}
+            className="btn btn-accent text-gray-600"
+          >
             See donor details
-          </button>
+          </Link>
         </div>
       </div>
     </div>

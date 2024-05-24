@@ -8,22 +8,17 @@ import NavMenu from "./NavMenu";
 import useUserInfo from "@/hooks/useUserInfo";
 import { useRouter } from "next/navigation";
 import { logoutUser } from "@/services/actions/logoutUser";
-import { useEffect, useState } from "react";
+import userIcon from "@/assets/user.png";
 
 const Navbar = () => {
+  const { userInfo, setUserInfo } = useUserInfo();
   const router = useRouter();
-  const { userInfo: initialUserInfo, loading } = useUserInfo();
-  const [userInfo, setUserInfo] = useState(initialUserInfo);
 
-  useEffect(() => {
-    setUserInfo(initialUserInfo);
-  }, [initialUserInfo]);
-
-  const handleLogout = () => {
+  const handleLogOut = () => {
     logoutUser(router);
     setUserInfo("");
   };
-  console.log(userInfo);
+
   return (
     <header className="bg-neutral">
       <Container>
@@ -70,9 +65,8 @@ const Navbar = () => {
                 <NavMenu />
               </ul>
             </div>
-            {loading ? (
-              <span className="loading loading-spinner text-accent"></span>
-            ) : userInfo && userInfo.email ? (
+
+            {userInfo ? (
               <div className="dropdown dropdown-end">
                 <div
                   tabIndex={0}
@@ -84,7 +78,7 @@ const Navbar = () => {
                       width={35}
                       height={35}
                       alt="User avatar"
-                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                      src={userIcon}
                     />
                   </div>
                 </div>
@@ -95,7 +89,7 @@ const Navbar = () => {
                   <li>
                     <a className="justify-between">Profile</a>
                   </li>
-                  <li onClick={handleLogout}>
+                  <li onClick={handleLogOut}>
                     <a>Logout</a>
                   </li>
                 </ul>

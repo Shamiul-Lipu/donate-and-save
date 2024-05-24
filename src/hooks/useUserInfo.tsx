@@ -2,15 +2,13 @@ import { useEffect, useState } from "react";
 import { getFromLocalStorage } from "@/utils/local-storage";
 import { JwtPayload, jwtDecode } from "jwt-decode";
 
-const useUserInfo = (): { userInfo: any | string; loading: boolean } => {
+const useUserInfo = (): any | string => {
   const [userInfo, setUserInfo] = useState<any | string>("");
-  const [loading, setLoading] = useState<boolean>(true);
 
-  const fetchUserInfo = () => {
-    setLoading(true);
-    const authToken = getFromLocalStorage("accessToken");
-    if (authToken) {
-      try {
+  useEffect(() => {
+    const fetchUserInfo = () => {
+      const authToken = getFromLocalStorage("accessToken");
+      if (authToken) {
         const decodedData: JwtPayload & { role: any } = jwtDecode(
           authToken
         ) as JwtPayload & {
@@ -21,30 +19,15 @@ const useUserInfo = (): { userInfo: any | string; loading: boolean } => {
           role: decodedData.role?.toLowerCase() || "",
         };
         setUserInfo(userInfo);
-      } catch (error) {
-        console.error("Failed to decode token", error);
+      } else {
         setUserInfo("");
       }
-    } else {
-      setUserInfo("");
-    }
-    setLoading(false);
-  };
+    };
 
-  useEffect(() => {
     fetchUserInfo();
-
-    const handleStorageChange = () => {
-      fetchUserInfo();
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
   }, []);
 
-  return { userInfo, loading };
+  return { userInfo, setUserInfo };
 };
 
 export default useUserInfo;

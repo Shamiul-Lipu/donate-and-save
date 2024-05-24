@@ -18,13 +18,14 @@ export const bloodDonationApi = baseApi.injectEndpoints({
       providesTags: [tagTypes.donors],
     }),
 
-    getSingleDonor: build.query({
+    getDonorDetails: build.query({
       query: (id: string | string[] | undefined) => ({
-        url: `/donor/${id}`,
+        url: `/blood-donation/donor-details/${id}`,
         method: "GET",
       }),
     }),
   }),
 });
 
-export const { useGetAllDonorsQuery } = bloodDonationApi;
+export const { useGetAllDonorsQuery, useGetDonorDetailsQuery } =
+  bloodDonationApi;

@@ -5,10 +5,10 @@ import { redirect } from "next/navigation";
 
 const setAccessToken = (token: string, option?: any) => {
   cookies().set("accessToken", token);
-  if (option && option.passwordChangeRequired) {
-    redirect("/dashboard/change-password");
+  if (option) {
+    redirect("/");
   }
-  if (option && !option.passwordChangeRequired && option.redirect) {
+  if (option && option.redirect) {
     redirect(option.redirect);
   }
 };

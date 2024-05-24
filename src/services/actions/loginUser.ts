@@ -1,10 +1,8 @@
-"use server";
+// "use server";
 
 import setAccessToken from "./setAccessToken";
 
 export const loginUser = async (data: any) => {
-  //   console.log(data);
-
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/auth/login`,
     {
@@ -13,11 +11,17 @@ export const loginUser = async (data: any) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-      cache: "no-store",
+      credentials: "include",
+      // cache: "no-store",
     }
   );
-
   const userInfo = await res.json();
+
+  if (userInfo.data.accessToken) {
+    setAccessToken(userInfo.data.accessToken, {
+      redirect: "/dashboard",
+    });
+  }
 
   return userInfo;
 };
