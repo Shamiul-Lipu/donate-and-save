@@ -90,7 +90,7 @@ const Navbar = () => {
                 </div>
                 <ul
                   tabIndex={0}
-                  className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-neutral rounded-box w-52 text-gray-300"
+                  className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-gray-700 rounded-box w-52 text-gray-300"
                 >
                   <li>
                     <a className="justify-between">Profile</a>

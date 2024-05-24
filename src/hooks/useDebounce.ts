@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
-export const useDebounce = ({ searchQuery, delay }: any) => {
-  const [debouncedValue, setDebouncedValue] = useState<string>(searchQuery);
+export function useDebounce(value: any, delay: number) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
 
   useEffect(() => {
     const handler = setTimeout(() => {
-      setDebouncedValue(searchQuery);
+      setDebouncedValue(value);
     }, delay);
 
     return () => {
       clearTimeout(handler);
     };
-  }, [searchQuery, delay]);
+  }, [value, delay]);
 
   return debouncedValue;
-};
+}

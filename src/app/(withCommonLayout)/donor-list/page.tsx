@@ -1,12 +1,12 @@
-"use client";
+import DonorList from "@/components/Shared/DonorList/DonorList";
+import React from "react";
 
-import { useGetAllDonorsQuery } from "@/redux/api/features/bloodDonationApi";
-
-const DonorList = () => {
-  const { data, isLoading } = useGetAllDonorsQuery({});
-  isLoading ? <p>loading</p> : {};
-  console.log(data);
-  return <div>DonorList</div>;
+const DonorPage = () => {
+  return (
+    <>
+      <DonorList cardLimit={10} />
+    </>
+  );
 };
 
-export default DonorList;
+export default DonorPage;
