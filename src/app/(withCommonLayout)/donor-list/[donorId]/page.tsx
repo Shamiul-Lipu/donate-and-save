@@ -32,7 +32,7 @@ const DonorDetailsPage = ({ params }: { params: { donorId: string } }) => {
   if (!donorDetails) {
     return <p>No donor details available.</p>;
   }
-
+  // console.log(donorDetails);
   return (
     <div className="w-full bg-neutral min-h-screen">
       <Container>
@@ -72,12 +72,22 @@ const DonorDetailsPage = ({ params }: { params: { donorId: string } }) => {
                 Address: {donorDetails.location} , {donorDetails.division} ,{" "}
                 {donorDetails.address}
               </p>
-              <Link
-                href="/request-blood"
-                className="btn btn-accent btn-outline"
-              >
-                Request for Blood
-              </Link>
+              {donorDetails.availability ? (
+                <Link
+                  href={{
+                    pathname: "/request-blood",
+                    query: { donorId: donorDetails?.id },
+                  }}
+                  passHref
+                  className="btn btn-accent btn-outline"
+                >
+                  Request for Blood
+                </Link>
+              ) : (
+                <button className="btn btn-error btn-outline cursor-not-allowed">
+                  Donor Not Available
+                </button>
+              )}
             </div>
           </div>
         </div>

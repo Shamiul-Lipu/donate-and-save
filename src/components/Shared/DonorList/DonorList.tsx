@@ -9,6 +9,7 @@ import { location as locationData } from "@/app/constants/location";
 import Skeleton from "@/components/UI/DonorDetailsCard/Skeleton";
 import DonorDetailsCard from "@/components/UI/DonorDetailsCard/DonorDetailsCard";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const DonorList = ({ cardLimit }: { cardLimit: number }) => {
   const pathname = usePathname();
@@ -113,6 +114,16 @@ const DonorList = ({ cardLimit }: { cardLimit: number }) => {
           </div>
         )}
       </Container>
+      <div className="mx-auto w-32">
+        <Link
+          className={`btn btn-outline btn-accent flex justify-center items-center ${
+            pathname === "/" ? "block" : "hidden"
+          }`}
+          href="/donor-list"
+        >
+          See More Donors
+        </Link>
+      </div>
     </div>
   );
 };

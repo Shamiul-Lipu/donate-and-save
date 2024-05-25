@@ -32,7 +32,7 @@ const RegisterPage = () => {
     payload.profileImage = getRandomImageLink(payload.gender);
     const id = toast.loading("Please wait...");
     try {
-      console.log(payload);
+      // console.log(payload);
       const res = await registerUser(payload);
       console.log(res);
       if (res?.data && res?.data?.id) {

@@ -24,8 +24,20 @@ export const bloodDonationApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+
+    donationRequest: build.mutation({
+      query: (data) => ({
+        url: "/blood-donation/donation-request",
+        method: "POST",
+        contentType: "application/json",
+        data,
+      }),
+    }),
   }),
 });
 
-export const { useGetAllDonorsQuery, useGetDonorDetailsQuery } =
-  bloodDonationApi;
+export const {
+  useGetAllDonorsQuery,
+  useGetDonorDetailsQuery,
+  useDonationRequestMutation,
+} = bloodDonationApi;
