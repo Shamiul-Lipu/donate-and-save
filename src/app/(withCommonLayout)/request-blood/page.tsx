@@ -77,6 +77,16 @@ const RequestBloodPage = () => {
 
   return (
     <div className="bg-neutral py-2 h-full">
+      {isUserLoading && (
+        <div className="h-screen bg-neutral w-full flex justify-center items-center overflow-hidden">
+          <div className="flex flex-col gap-4 w-52">
+            <div className="skeleton h-52 w-full"></div>
+            <div className="skeleton h-4 w-28"></div>
+            <div className="skeleton h-4 w-full"></div>
+            <div className="skeleton h-4 w-full"></div>
+          </div>
+        </div>
+      )}
       <div className="h-fit bg-neutral">
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -88,6 +98,7 @@ const RequestBloodPage = () => {
 
           <div className="space-y-9 text-white lg:space-y-1">
             {/* Non-editable fields */}
+
             {user && (
               <>
                 <div className="flex justify-evenly items-center">

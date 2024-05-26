@@ -9,6 +9,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import DonorDetailsCard from "@/components/UI/DonorDetailsCard/DonorDetailsCard";
+import ProfileCard from "@/components/UI/ProfileCard/ProfileCard";
 
 const DonorDetailsPage = ({ params }: { params: { donorId: string } }) => {
   const { data: donorDetails, isLoading: isDonorDetailsLoading } =
@@ -26,7 +27,16 @@ const DonorDetailsPage = ({ params }: { params: { donorId: string } }) => {
     isDonorDetailsLoading ||
     (donorDetails?.location && isDonorsListLoading)
   ) {
-    return <p>Loading...</p>;
+    return (
+      <div className="h-screen bg-neutral w-full flex justify-center items-center overflow-hidden">
+        <div className="flex flex-col gap-4 w-52">
+          <div className="skeleton h-52 w-full"></div>
+          <div className="skeleton h-4 w-28"></div>
+          <div className="skeleton h-4 w-full"></div>
+          <div className="skeleton h-4 w-full"></div>
+        </div>
+      </div>
+    );
   }
 
   if (!donorDetails) {
@@ -36,7 +46,7 @@ const DonorDetailsPage = ({ params }: { params: { donorId: string } }) => {
   return (
     <div className="w-full bg-neutral min-h-screen">
       <Container>
-        <div className="hero py-6 text-gray-300">
+        {/* <div className="hero py-6 text-gray-300">
           <div className="hero-content flex-col lg:flex-row">
             <Image
               width={200}
@@ -90,7 +100,8 @@ const DonorDetailsPage = ({ params }: { params: { donorId: string } }) => {
               )}
             </div>
           </div>
-        </div>
+        </div> */}
+        <ProfileCard user={donorDetails} requestButton={true} />
         <div className="mt-8">
           <h2 className="text-2xl font-bold text-gray-300 mb-4 text-center">
             Donors from the same location
