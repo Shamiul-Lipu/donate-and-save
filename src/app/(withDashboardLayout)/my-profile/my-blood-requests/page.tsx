@@ -1,43 +1,28 @@
-import Image from "next/image";
+"use client";
+import RequestsTable from "@/components/Dashboard/Tables/RequestsTable";
+import { useGetAllRequestsQuery } from "@/redux/api/features/bloodDonationApi";
 
 const MyBloodRequestsPage = () => {
+  const {
+    data: requests,
+    isLoading,
+    isFetching,
+  } = useGetAllRequestsQuery(undefined);
+
+  if (isLoading || isFetching) {
+    return <div className="text-white">Loading</div>;
+  }
+
   return (
-    <div>
-      My Blood Reequests
-      <div className="card w-96 bg-base-100 shadow-xl">
-        <figure>
-          <Image
-            width={200}
-            height={200}
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-            alt="Shoes"
-          />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title">Shoes!</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
-          <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
-          </div>
-        </div>
+    <div className="bg-black min-h-screen text-gray-300">
+      <div className="text-gray-300 p-6 rounded-lg shadow-md text-center">
+        <h3 className="text-2xl font-bold mb-2">My Blood Donation Requests</h3>
+        <p className="text-gray-400 max-w-lg mx-auto">
+          Here you can find a history of all the blood donation requests you
+          have made. Keep track of your requests and manage them efficiently.
+        </p>
       </div>
-      <div className="card w-96 bg-base-100 shadow-xl">
-        <figure>
-          <Image
-            width={200}
-            height={200}
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-            alt="Shoes"
-          />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title">Shoes!</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
-          <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
-          </div>
-        </div>
-      </div>
+      <RequestsTable requests={requests?.requestByMe} />
     </div>
   );
 };

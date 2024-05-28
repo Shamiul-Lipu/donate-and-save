@@ -38,7 +38,9 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
               <p>{user?.name}</p>
               <p>Role: {user?.role}</p>
               {user?.role === "ADMIN" && (
-                <Link href={"/dashboard"}>Dashboard</Link>
+                <Link href={"/dashboard/user-management"} className="underline">
+                  Dashboard
+                </Link>
               )}
             </div>
             <label

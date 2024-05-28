@@ -6,7 +6,7 @@ const DonorDetailsCard = ({ donor }: any) => {
   return (
     <div
       key={donor?.id}
-      className="card w-96 bg-gray-600 shadow-xl text-gray-100"
+      className="card w-96 bg-gradient-to-b from-slate-600 to-gray-800 shadow-xl text-gray-100"
     >
       <div className="relative">
         {donor?.availability ? (

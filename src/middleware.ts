@@ -9,7 +9,7 @@ const AuthRoutes = ["/login", "/register"];
 const commonPrivateRoutes = ["/my-profile", "/request-blood"];
 const roleBasedPrivateRoutes = {
   // USER: [/^\/dashboard\/user/],
-  ADMIN: [/^\/dashboard\/admin/],
+  ADMIN: [/^\/dashboard\/user-management/],
 };
 
 export function middleware(request: NextRequest) {
@@ -42,12 +42,19 @@ export function middleware(request: NextRequest) {
   }
 
   const role = decodedData?.role;
+  // console.log(role);
+  // if (role && roleBasedPrivateRoutes[role as Role]) {
+  //   const routes = roleBasedPrivateRoutes[role as Role];
+  //   console.log(routes.some((route) => pathname.match(route)));
+  //   if (routes.some((route) => pathname.match(route))) {
+  //     // routes.some((route) => console.log({ route }));
+  //     return NextResponse.next();
+  //   }
+  // }
 
-  if (role && roleBasedPrivateRoutes[role as Role]) {
-    const routes = roleBasedPrivateRoutes[role as Role];
-    if (routes.some((route) => pathname.match(route))) {
-      return NextResponse.next();
-    }
+  if (pathname === "/dashboard/user-management" && role === "ADMIN") {
+    // console.log("ok");
+    return NextResponse.next();
   }
 
   return NextResponse.redirect(new URL("/", request.url));

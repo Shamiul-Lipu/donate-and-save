@@ -12,11 +12,11 @@ const SidebarItems = ({ role }: { role: string }) => {
         <li>
           <Link
             className={`link hover:bg-neutral-900  ${
-              pathname === "/dashboard/user-anagement"
+              pathname === "/dashboard/user-management"
                 ? "text-cyan-200 font-semibold focus:text-cyan-200"
                 : "no-underline text-gray-300 hover:underline"
             }`}
-            href="/dashboard/user-anagement"
+            href="/dashboard/user-management"
           >
             User Management
           </Link>

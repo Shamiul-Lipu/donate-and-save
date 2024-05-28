@@ -33,6 +33,23 @@ export const bloodDonationApi = baseApi.injectEndpoints({
         data,
       }),
     }),
+
+    getAllRequests: build.query({
+      query: () => ({
+        url: `/blood-donation/donation-request`,
+        method: "GET",
+      }),
+    }),
+
+    updateReqestStatus: build.mutation({
+      query: (payload) => ({
+        url: `/blood-donation/donation-request/${payload.id}`,
+        method: "PUT",
+        contentType: "application/json",
+        data: payload.data,
+      }),
+      // invalidatesTags: [],
+    }),
   }),
 });
 
@@ -40,4 +57,5 @@ export const {
   useGetAllDonorsQuery,
   useGetDonorDetailsQuery,
   useDonationRequestMutation,
+  useGetAllRequestsQuery,
 } = bloodDonationApi;

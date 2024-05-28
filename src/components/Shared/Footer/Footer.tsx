@@ -5,30 +5,51 @@ import Container from "../Container/Container";
 
 const Footer = () => {
   return (
-    <footer className="bg-neutral text-white">
+    <footer className="bg-neutral text-white py-3">
       <Container>
-        <div className="footer p-10 ">
+        <footer className="footer p-10 bg-neutral text-gray-400 border-t-2 border-gray-300">
           <div>
-            <h6 className="footer-title">SERVICES</h6>
-            <a className="link link-hover">LifeTrack</a>
-            <a className="link link-hover">SafeTransfer </a>
-            <a className="link link-hover">DonorAlert </a>
-            <a className="link link-hover">QuickMatch</a>
+            <h6 className="footer-title">Our Services</h6>
+            <a className="link link-hover">Blood Donation</a>
+            <a className="link link-hover">Organize Blood Drives</a>
+            <a className="link link-hover">Volunteer Opportunities</a>
+            <a className="link link-hover">Blood Storage</a>
           </div>
           <div>
-            <h6 className="footer-title">Company</h6>
-            <a className="link link-hover">About us</a>
-            <a className="link link-hover">Contact</a>
-            <a className="link link-hover">Volunteer</a>
-            <a className="link link-hover">Press kit</a>
+            <h6 className="footer-title">About Us</h6>
+            <a className="link link-hover">Our Mission</a>
+            <a className="link link-hover">Contact Us</a>
+            <a className="link link-hover">Join Our Team</a>
+            <a className="link link-hover">Media Kit</a>
           </div>
           <div>
             <h6 className="footer-title">Legal</h6>
-            <a className="link link-hover">Terms of use</a>
-            <a className="link link-hover">Privacy policy</a>
-            <a className="link link-hover">Cookie policy</a>
+            <a className="link link-hover">Terms of Service</a>
+            <a className="link link-hover">Privacy Policy</a>
+            <a className="link link-hover">Cookie Policy</a>
           </div>
-        </div>
+          <form>
+            <h6 className="footer-title">Newsletter</h6>
+            <fieldset className="form-control w-80">
+              <label className="label">
+                <span className="label-text text-gray-400">
+                  Enter your email address
+                </span>
+              </label>
+              <div className="join">
+                <input
+                  type="text"
+                  placeholder="username@site.com"
+                  className="input input-bordered join-item bg-gray-500"
+                />
+                <button className="btn btn-accent btn-outline join-item">
+                  Subscribe
+                </button>
+              </div>
+            </fieldset>
+          </form>
+        </footer>
+
         <div className="footer px-10 py-4 border-t  border-base-300">
           <aside className="items-center grid-flow-col">
             <Link href={"/"} className="btn btn-ghost text-xl">

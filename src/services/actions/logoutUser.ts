@@ -6,6 +6,8 @@ export const logoutUser = (router: AppRouterInstance) => {
 
   deleteCookies(["accessToken", "refreshToken"]);
 
+  window.location.href = "/";
+
   router.refresh();
   router.push("/");
 };
