@@ -1,7 +1,7 @@
 "use server";
 
 export const registerUser = async (data: any) => {
-  console.log(data);
+  // console.log(data);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/auth/register`,
     {

@@ -22,7 +22,7 @@ const Navbar = () => {
   return (
     <header className="bg-neutral">
       <Container>
-        <nav className="navbar bg-neutral text-neutral-content">
+        <nav className="navbar bg-neutral text-neutral-content py-5">
           <div className="navbar-start">
             <Link href="/" className="btn btn-ghost text-xl">
               <Image src={bloodDlogo} width={50} height={50} alt="logo" />
@@ -71,12 +71,12 @@ const Navbar = () => {
                 <div
                   tabIndex={0}
                   role="button"
-                  className="btn btn-ghost btn-circle avatar"
+                  className="btn btn-ghost btn-circle avatar online"
                 >
-                  <div className="w-10 rounded-full">
+                  <div className="w-9 rounded-full ring ring-cyan-700 ring-offset-base-100 ring-offset-2">
                     <Image
-                      width={35}
-                      height={35}
+                      width={36}
+                      height={36}
                       alt="User avatar"
                       src={userIcon}
                     />

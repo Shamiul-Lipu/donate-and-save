@@ -34,22 +34,22 @@ const RegisterPage = () => {
     try {
       // console.log(payload);
       const res = await registerUser(payload);
-      console.log(res);
+      // console.log(res);
       if (res?.data && res?.data?.id) {
-        toast.update(id, {
-          render: "User registered successfully",
-          type: "success",
-          isLoading: false,
-          autoClose: 2000,
-        });
         const result = await loginUser({
           email: payload.email,
           password: payload.password,
         });
         if (result?.data?.accessToken) {
           storeUserInfo({ accessToken: result?.data?.accessToken });
-          router.push("/dashboard");
+          router.push("/");
         }
+        toast.update(id, {
+          render: "User registered successfully",
+          type: "success",
+          isLoading: false,
+          autoClose: 2000,
+        });
       } else {
         toast.update(id, {
           render: "Failed to register user",
@@ -104,200 +104,231 @@ const RegisterPage = () => {
             </div>
           </div>
           <div className="w-full mx-auto bg-[#030317] p-8 rounded-md mt-12 text-gray-200">
-            <h2 className="text-2xl font-bold mb-6">Register</h2>
+            <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="mb-6">
-                <label htmlFor="name" className="block mb-2">
-                  Name
-                </label>
-                <input
-                  id="name"
-                  {...register("name")}
-                  type="text"
-                  placeholder="Name"
-                  className={`w-full p-3 bg-[#030317] border ${
-                    errors.name ? "border-red-500" : "border-white/20"
-                  } rounded-md focus:outline-none focus:border-indigo-500`}
-                />
-                {errors.name && (
-                  <p className="text-red-500">
-                    {errors.name.message?.toString()}
-                  </p>
-                )}
+              <div className="flex justify-between gap-1 items-center">
+                <div className="mb-6">
+                  <label htmlFor="name" className="block mb-2">
+                    Name
+                  </label>
+                  <input
+                    id="name"
+                    {...register("name")}
+                    type="text"
+                    placeholder="Name"
+                    className={`w-full p-3 bg-[#030317] border ${
+                      errors.name ? "border-red-500" : "border-white/20"
+                    } rounded-md focus:outline-none focus:border-indigo-500`}
+                  />
+                  {errors.name && (
+                    <p className="text-red-500">
+                      {errors.name.message?.toString()}
+                    </p>
+                  )}
+                </div>
+                <div className="mb-6">
+                  <label htmlFor="email" className="block mb-2">
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    {...register("email")}
+                    type="email"
+                    placeholder="Email"
+                    className={`w-full p-3 bg-[#030317] border ${
+                      errors.email ? "border-red-500" : "border-white/20"
+                    } rounded-md focus:outline-none focus:border-indigo-500`}
+                  />
+                  {errors.email && (
+                    <p className="text-red-500">
+                      {errors.email.message?.toString()}
+                    </p>
+                  )}
+                </div>
               </div>
-              <div className="mb-6">
-                <label htmlFor="email" className="block mb-2">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  {...register("email")}
-                  type="email"
-                  placeholder="Email"
-                  className={`w-full p-3 bg-[#030317] border ${
-                    errors.email ? "border-red-500" : "border-white/20"
-                  } rounded-md focus:outline-none focus:border-indigo-500`}
-                />
-                {errors.email && (
-                  <p className="text-red-500">
-                    {errors.email.message?.toString()}
-                  </p>
-                )}
+
+              <div className="flex justify-between gap-1 items-center">
+                <div className="mb-6">
+                  <label htmlFor="password" className="block mb-2">
+                    Password
+                  </label>
+                  <input
+                    id="password"
+                    {...register("password")}
+                    type="password"
+                    placeholder="Password"
+                    className={`w-full p-3 bg-[#030317] border ${
+                      errors.password ? "border-red-500" : "border-white/20"
+                    } rounded-md focus:outline-none focus:border-indigo-500`}
+                  />
+                  {errors.password && (
+                    <p className="text-red-500">
+                      {errors.password.message?.toString()}
+                    </p>
+                  )}
+                </div>
+                <div className="mb-6">
+                  <label htmlFor="gender" className="block mb-2">
+                    Gender
+                  </label>
+                  <select
+                    id="gender"
+                    {...register("gender")}
+                    className={`w-full p-3 bg-[#030317] border ${
+                      errors.gender ? "border-red-500" : "border-white/20"
+                    } rounded-md focus:outline-none focus:border-indigo-500`}
+                  >
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                  {errors.gender && (
+                    <p className="text-red-500">
+                      {errors.gender.message?.toString()}
+                    </p>
+                  )}
+                </div>
               </div>
-              <div className="mb-6">
-                <label htmlFor="password" className="block mb-2">
-                  Password
-                </label>
-                <input
-                  id="password"
-                  {...register("password")}
-                  type="password"
-                  placeholder="Password"
-                  className={`w-full p-3 bg-[#030317] border ${
-                    errors.password ? "border-red-500" : "border-white/20"
-                  } rounded-md focus:outline-none focus:border-indigo-500`}
-                />
-                {errors.password && (
-                  <p className="text-red-500">
-                    {errors.password.message?.toString()}
-                  </p>
-                )}
+
+              <div className="flex justify-between gap-1 items-center">
+                <div className="mb-6">
+                  <label htmlFor="bloodType" className="block mb-2">
+                    Blood Type
+                  </label>
+                  <select
+                    id="bloodType"
+                    {...register("bloodType")}
+                    className={`w-full p-3 bg-[#030317] border ${
+                      errors.bloodType ? "border-red-500" : "border-white/20"
+                    } rounded-md focus:outline-none focus:border-indigo-500`}
+                  >
+                    <option value="">Select Blood Type</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                  </select>
+                  {errors.bloodType && (
+                    <p className="text-red-500">
+                      {errors.bloodType.message?.toString()}
+                    </p>
+                  )}
+                </div>
+                <div className="mb-6">
+                  <label htmlFor="location" className="block mb-2">
+                    Location
+                  </label>
+                  <select
+                    id="location"
+                    {...register("location")}
+                    onChange={(e) => setSelectedlocation(e.target.value)}
+                    className={`w-full p-3 bg-[#030317] border ${
+                      errors.location ? "border-red-500" : "border-white/20"
+                    } rounded-md focus:outline-none focus:border-indigo-500`}
+                  >
+                    <option value="">Select location</option>
+                    {Object.keys(location).map((location) => (
+                      <option key={location} value={location}>
+                        {location}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.location && (
+                    <p className="text-red-500">
+                      {errors.location.message?.toString()}
+                    </p>
+                  )}
+                </div>
+                <div className="mb-6">
+                  <label htmlFor="division" className="block mb-2">
+                    Division
+                  </label>
+                  <select
+                    id="division"
+                    {...register("division")}
+                    className={`w-full p-3 bg-[#030317] border ${
+                      errors.division ? "border-red-500" : "border-white/20"
+                    } rounded-md focus:outline-none focus:border-indigo-500`}
+                  >
+                    <option value="">Select Division</option>
+                    {divisions.map((division) => (
+                      <option key={division} value={division}>
+                        {division}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.division && (
+                    <p className="text-red-500">
+                      {errors.division.message?.toString()}
+                    </p>
+                  )}
+                </div>
               </div>
-              <div className="mb-6">
-                <label htmlFor="gender" className="block mb-2">
-                  Gender
-                </label>
-                <select
-                  id="gender"
-                  {...register("gender")}
-                  className={`w-full p-3 bg-[#030317] border ${
-                    errors.gender ? "border-red-500" : "border-white/20"
-                  } rounded-md focus:outline-none focus:border-indigo-500`}
-                >
-                  <option value="">Select Gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
-                {errors.gender && (
-                  <p className="text-red-500">
-                    {errors.gender.message?.toString()}
-                  </p>
-                )}
+
+              <div className="flex justify-between gap-1 items-center">
+                <div className="mb-6">
+                  <label htmlFor="address" className="block mb-2">
+                    Address details
+                  </label>
+                  <input
+                    id="address"
+                    {...register("address")}
+                    type="text"
+                    placeholder="Address"
+                    className={`w-full p-3 bg-[#030317] border ${
+                      errors.address ? "border-red-500" : "border-white/20"
+                    } rounded-md focus:outline-none focus:border-indigo-500`}
+                  />
+                  {errors.address && (
+                    <p className="text-red-500">
+                      {errors.address.message?.toString()}
+                    </p>
+                  )}
+                </div>
+                <div className="mb-6">
+                  <label htmlFor="age" className="block mb-2">
+                    Age
+                  </label>
+                  <input
+                    id="age"
+                    {...register("age", { valueAsNumber: true })}
+                    type="number"
+                    placeholder="Age"
+                    className={`w-full p-3 bg-[#030317] border ${
+                      errors.age ? "border-red-500" : "border-white/20"
+                    } rounded-md focus:outline-none focus:border-indigo-500`}
+                  />
+                  {errors.age && (
+                    <p className="text-red-500">
+                      {errors.age.message?.toString()}
+                    </p>
+                  )}
+                </div>
+                <div className="mb-6">
+                  <label htmlFor="address" className="block mb-2">
+                    Address details
+                  </label>
+                  <input
+                    id="phoneNumber"
+                    {...register("phoneNumber")}
+                    type="text"
+                    placeholder="Phone Number"
+                    className={`w-full p-3 bg-[#030317] border ${
+                      errors.phoneNumber ? "border-red-500" : "border-white/20"
+                    } rounded-md focus:outline-none focus:border-indigo-500`}
+                  />
+                  {errors.phoneNumber && (
+                    <p className="text-red-500">
+                      {errors.phoneNumber.message?.toString()}
+                    </p>
+                  )}
+                </div>
               </div>
-              <div className="mb-6">
-                <label htmlFor="bloodType" className="block mb-2">
-                  Blood Type
-                </label>
-                <select
-                  id="bloodType"
-                  {...register("bloodType")}
-                  className={`w-full p-3 bg-[#030317] border ${
-                    errors.bloodType ? "border-red-500" : "border-white/20"
-                  } rounded-md focus:outline-none focus:border-indigo-500`}
-                >
-                  <option value="">Select Blood Type</option>
-                  <option value="A+">A+</option>
-                  <option value="A-">A-</option>
-                  <option value="B+">B+</option>
-                  <option value="B-">B-</option>
-                  <option value="AB+">AB+</option>
-                  <option value="AB-">AB-</option>
-                  <option value="O+">O+</option>
-                  <option value="O-">O-</option>
-                </select>
-                {errors.bloodType && (
-                  <p className="text-red-500">
-                    {errors.bloodType.message?.toString()}
-                  </p>
-                )}
-              </div>
-              <div className="mb-6">
-                <label htmlFor="location" className="block mb-2">
-                  Location
-                </label>
-                <select
-                  id="location"
-                  {...register("location")}
-                  onChange={(e) => setSelectedlocation(e.target.value)}
-                  className={`w-full p-3 bg-[#030317] border ${
-                    errors.location ? "border-red-500" : "border-white/20"
-                  } rounded-md focus:outline-none focus:border-indigo-500`}
-                >
-                  <option value="">Select location</option>
-                  {Object.keys(location).map((location) => (
-                    <option key={location} value={location}>
-                      {location}
-                    </option>
-                  ))}
-                </select>
-                {errors.location && (
-                  <p className="text-red-500">
-                    {errors.location.message?.toString()}
-                  </p>
-                )}
-              </div>
-              <div className="mb-6">
-                <label htmlFor="division" className="block mb-2">
-                  Division
-                </label>
-                <select
-                  id="division"
-                  {...register("division")}
-                  className={`w-full p-3 bg-[#030317] border ${
-                    errors.division ? "border-red-500" : "border-white/20"
-                  } rounded-md focus:outline-none focus:border-indigo-500`}
-                >
-                  <option value="">Select Division</option>
-                  {divisions.map((division) => (
-                    <option key={division} value={division}>
-                      {division}
-                    </option>
-                  ))}
-                </select>
-                {errors.division && (
-                  <p className="text-red-500">
-                    {errors.division.message?.toString()}
-                  </p>
-                )}
-              </div>
-              <div className="mb-6">
-                <label htmlFor="address" className="block mb-2">
-                  Address details
-                </label>
-                <input
-                  id="address"
-                  {...register("address")}
-                  type="text"
-                  placeholder="Address"
-                  className={`w-full p-3 bg-[#030317] border ${
-                    errors.address ? "border-red-500" : "border-white/20"
-                  } rounded-md focus:outline-none focus:border-indigo-500`}
-                />
-                {errors.address && (
-                  <p className="text-red-500">
-                    {errors.address.message?.toString()}
-                  </p>
-                )}
-              </div>
-              <div className="mb-6">
-                <label htmlFor="age" className="block mb-2">
-                  Age
-                </label>
-                <input
-                  id="age"
-                  {...register("age", { valueAsNumber: true })}
-                  type="number"
-                  placeholder="Age"
-                  className={`w-full p-3 bg-[#030317] border ${
-                    errors.age ? "border-red-500" : "border-white/20"
-                  } rounded-md focus:outline-none focus:border-indigo-500`}
-                />
-                {errors.age && (
-                  <p className="text-red-500">
-                    {errors.age.message?.toString()}
-                  </p>
-                )}
-              </div>
+
               <div className="mb-6">
                 <label htmlFor="bio" className="block mb-2">
                   Bio
@@ -316,6 +347,7 @@ const RegisterPage = () => {
                   </p>
                 )}
               </div>
+
               <div className="mb-6 flex items-center">
                 <input
                   id="availability"

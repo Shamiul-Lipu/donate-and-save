@@ -11,6 +11,7 @@ export const registerUserValidationSchema = z.object({
   bloodType: z.string().min(1, "Blood type is required"),
   location: z.string().min(1, "location is required"),
   division: z.string().min(1, "Division is required"),
+  phoneNumber: z.string().min(1, "PhoneNumber is required"),
   age: z
     .number()
     .int()

@@ -19,7 +19,7 @@ export const loginUser = async (data: any) => {
 
   if (userInfo.data.accessToken) {
     setAccessToken(userInfo.data.accessToken, {
-      redirect: "/dashboard",
+      redirect: "/",
     });
   }
 

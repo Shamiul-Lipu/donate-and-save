@@ -56,7 +56,7 @@ const RequestBloodPage = () => {
           isLoading: false,
           autoClose: 2000,
         });
-        router.push("/dashboard");
+        router.push("/my-profile/my-blood-requests");
       } else {
         toast.update(id, {
           render: "Request Failed",

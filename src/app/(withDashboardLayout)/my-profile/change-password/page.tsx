@@ -61,11 +61,14 @@ const ChangePasswordForm = () => {
     newPassword !== rewriteNewPassword || !newPassword || !rewriteNewPassword;
 
   return (
-    <div className="bg-black min-h-screen text-gray-300 flex justify-center items-center">
+    <div className="bg-black min-h-screen text-gray-300 flex justify-center items-start">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="p-8 w-full max-w-md text-gray-100"
       >
+        <h3 className="text-2xl text-center font-bold mb-2 text-gray-300 py-3">
+          Change Password
+        </h3>
         <div className="mb-6">
           <label htmlFor="currentPassword" className="block mb-2">
             Current Password

@@ -13,6 +13,24 @@ const MyBloodRequestsPage = () => {
     return <div className="text-white">Loading</div>;
   }
 
+  const transformedRequests = requests?.requestByMe?.map(
+    (request: any, index: number) => ({
+      id: request?.donor?.userProfile?.id,
+      key: request?.donor?.userProfile?.id,
+      index: index,
+      name: request?.donor?.name,
+      availability: request?.donor?.availability,
+      bloodType: request?.donor?.bloodType,
+      lastDonationDate: request?.donor?.userProfile?.lastDonationDate,
+      requestStatus: request?.requestStatus,
+      phoneNumber: request?.donor?.userProfile?.phoneNumber,
+      location: request?.donor?.location,
+      division: request?.donor?.division,
+      address: request?.donor?.address,
+      requestToMe: false,
+    })
+  );
+
   return (
     <div className="bg-black min-h-screen text-gray-300">
       <div className="text-gray-300 p-6 rounded-lg shadow-md text-center">
@@ -22,7 +40,7 @@ const MyBloodRequestsPage = () => {
           have made. Keep track of your requests and manage them efficiently.
         </p>
       </div>
-      <RequestsTable requests={requests?.requestByMe} />
+      <RequestsTable requests={transformedRequests} />
     </div>
   );
 };

@@ -38,7 +38,6 @@ const LoginPage = () => {
     try {
       // console.log(data);
       const res = await loginUser(data);
-
       if (res?.data?.accessToken) {
         storeUserInfo({ accessToken: res?.data?.accessToken });
         toast.update(id, {

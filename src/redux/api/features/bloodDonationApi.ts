@@ -32,6 +32,7 @@ export const bloodDonationApi = baseApi.injectEndpoints({
         contentType: "application/json",
         data,
       }),
+      invalidatesTags: [tagTypes.requests],
     }),
 
     getAllRequests: build.query({
@@ -39,16 +40,20 @@ export const bloodDonationApi = baseApi.injectEndpoints({
         url: `/blood-donation/donation-request`,
         method: "GET",
       }),
+      providesTags: [tagTypes.requests],
     }),
 
     updateReqestStatus: build.mutation({
-      query: (payload) => ({
-        url: `/blood-donation/donation-request/${payload.id}`,
-        method: "PUT",
-        contentType: "application/json",
-        data: payload.data,
-      }),
-      // invalidatesTags: [],
+      query: (data) => {
+        // console.log(data.requestStatus);
+        return {
+          url: `/blood-donation/donation-request/${data.id}`,
+          method: "PUT",
+          contentType: "application/json",
+          data: { status: data.requestStatus },
+        };
+      },
+      invalidatesTags: [tagTypes.requests],
     }),
   }),
 });
@@ -58,4 +63,5 @@ export const {
   useGetDonorDetailsQuery,
   useDonationRequestMutation,
   useGetAllRequestsQuery,
+  useUpdateReqestStatusMutation,
 } = bloodDonationApi;

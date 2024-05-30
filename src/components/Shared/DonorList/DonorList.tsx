@@ -92,7 +92,7 @@ const DonorList = ({ cardLimit }: { cardLimit: number }) => {
             </div>
           </div>
         )}
-        {data && pathname === "/donor-list" && (
+        {!isLoading && data && pathname === "/donor-list" && (
           <div className="flex justify-center items-center py-4">
             <button
               onClick={() => handlePageChange(page - 1)}
@@ -102,11 +102,11 @@ const DonorList = ({ cardLimit }: { cardLimit: number }) => {
               Previous
             </button>
             <span className="px-4 text-white">
-              Page {page} of {Math.ceil(data.meta.total / limit)}
+              Page {page} of {Math.ceil(data?.meta?.total / limit)}
             </span>
             <button
               onClick={() => handlePageChange(page + 1)}
-              disabled={page * limit >= data.meta.total}
+              disabled={page * limit >= data?.meta?.total}
               className="px-4 py-2 bg-gray-300 text-black rounded disabled:opacity-50"
             >
               Next

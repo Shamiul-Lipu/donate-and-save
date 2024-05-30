@@ -53,7 +53,7 @@ export function middleware(request: NextRequest) {
   // }
 
   if (pathname === "/dashboard/user-management" && role === "ADMIN") {
-    // console.log("ok");
+    // console.log("ok", role);
     return NextResponse.next();
   }
 
@@ -61,11 +61,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/login",
-    "/register",
-    "/dashboard/:page*",
-    "/my-profile/:page*",
-    "/request-blood",
-  ],
+  matcher: ["/dashboard/:page*", "/my-profile/:page*", "/request-blood"],
 };

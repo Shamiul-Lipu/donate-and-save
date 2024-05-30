@@ -1,43 +1,53 @@
-import Image from "next/image";
+"use client";
+import RequestsTable from "@/components/Dashboard/Tables/RequestsTable";
+import { useGetAllRequestsQuery } from "@/redux/api/features/bloodDonationApi";
+import { useForm } from "react-hook-form";
 
 const RequestsToMePage = () => {
+  const {
+    data: requests,
+    isLoading,
+    isFetching,
+  } = useGetAllRequestsQuery(undefined);
+  const { control, handleSubmit, getValues } = useForm();
+
+  if (isLoading || isFetching) {
+    return <div className="text-white">Loading</div>;
+  }
+
+  // console.log(requests?.requestToMe);
+  const transformedRequests = requests?.requestToMe?.map(
+    (request: any, index: number) => ({
+      id: request?.id,
+      key: request?.id,
+      index: index,
+      name: request?.requesterName,
+      availability: false,
+      bloodType: request?.requester?.bloodType,
+      lastDonationDate: false,
+      requestStatus: request?.requestStatus,
+      phoneNumber: request?.requesterPhoneNumber,
+      location: request?.requesterLocation,
+      division: request?.requesterDivision,
+      address: request?.requesterAddress,
+      requestToMe: true,
+    })
+  );
+
   return (
-    <div>
-      RequestsToMePage RequestsToMePage
-      <div className="card w-96 bg-base-100 shadow-xl">
-        <figure>
-          <Image
-            width={200}
-            height={200}
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-            alt="Shoes"
-          />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title">Shoes!</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
-          <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
-          </div>
-        </div>
+    <div className="bg-black min-h-screen text-gray-300">
+      <div className="text-gray-300 p-6 rounded-lg shadow-md text-center">
+        <h3 className="text-2xl font-bold mb-2">
+          Requests for Blood Donation to Me
+        </h3>
+        <p className="text-gray-400 max-w-lg mx-auto">
+          View and manage all the blood donation requests you have received.
+          This section provides a detailed overview of individuals who need your
+          help.
+        </p>
       </div>
-      <div className="card w-96 bg-base-100 shadow-xl">
-        <figure>
-          <Image
-            width={200}
-            height={200}
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-            alt="Shoes"
-          />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title">Shoes!</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
-          <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
-          </div>
-        </div>
-      </div>
+
+      <RequestsTable requests={transformedRequests} />
     </div>
   );
 };
