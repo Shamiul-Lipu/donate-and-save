@@ -37,7 +37,6 @@ const HeroSection = () => {
             <div className="mt-10  w-full flex max-w-md mx-auto lg:mx-0">
               <div className="flex sm:flex-row flex-col gap-5 w-full">
                 <form
-                  action="#"
                   className="py-1 pl-6 w-full pr-1 flex gap-3 items-center text-gray-600 shadow-lg shadow-gray-200/20
                             border border-gray-200 bg-gray-100 rounded-full ease-linear focus-within:bg-white  focus-within:border-blue-600"
                 >
@@ -78,7 +77,7 @@ const HeroSection = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-1 lg:w-1/2 lg:h-auto relative lg:max-w-none lg:mx-0 mx-auto max-w-3xl space-x-4">
+          <div className="flex flex-1 lg:w-1/2 lg:h-auto relative lg:max-w-none lg:mx-0 mx-auto max-w-3xl space-x-4 bg-slate-700 rounded-xl border-2 border-gray-500 bg-opacity-30 p-2">
             <div className="relative flex-1">
               <Image
                 src={coverOne}

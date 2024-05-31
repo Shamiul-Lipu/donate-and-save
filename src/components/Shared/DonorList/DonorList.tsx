@@ -64,7 +64,7 @@ const DonorList = ({ cardLimit }: { cardLimit: number }) => {
 
   return (
     <div className="bg-neutral">
-      <div className="text-center text-gray-300 px-6 py-14 lg:px-8">
+      <div className="text-center text-gray-300 px-6 py-7 lg:px-8">
         <h3 className="text-4xl font-bold">Search Blood Donors</h3>
         <p className="pt-4 max-w-md mx-auto">
           Search for donors by type, location, and availability. Connecting
@@ -78,7 +78,7 @@ const DonorList = ({ cardLimit }: { cardLimit: number }) => {
           locationData={locationData}
         />
         {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-1">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-1 py-4">
             {[...Array(limit)].map((_, index) => (
               <Skeleton key={index} />
             ))}

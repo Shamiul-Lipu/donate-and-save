@@ -20,20 +20,29 @@ const RegisterPage = () => {
   const router = useRouter();
   const [selectedlocation, setSelectedlocation] = useState<string>("");
   const [divisions, setDivisions] = useState<string[]>([]);
+
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const isSubmitEnabled = password === confirmPassword && password.length > 0;
+
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
+    control,
   } = useForm({
     resolver: zodResolver(registerUserValidationSchema),
   });
 
   const onSubmit = async (payload: any) => {
     payload.profileImage = getRandomImageLink(payload.gender);
+    const { confirmPassword, ...registerPayload } = payload;
+    // console.log(registerPayload);
     const id = toast.loading("Please wait...");
     try {
       // console.log(payload);
-      const res = await registerUser(payload);
+      const res = await registerUser(registerPayload);
       // console.log(res);
       if (res?.data && res?.data?.id) {
         const result = await loginUser({
@@ -77,6 +86,20 @@ const RegisterPage = () => {
     // Todo: not a good practice
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedlocation]);
+
+  // useEffect(() => {
+  //   const subscription = watch(({ password, confirmPassword }) => {
+  //     setIsSubmitEnabled(
+  //       password && confirmPassword && password === confirmPassword
+  //     );
+  //   });
+  //   return () => subscription.unsubscribe();
+  // }, [watch]);
+
+  const newPassword = watch("newPassword");
+  const rewriteNewPassword = watch("rewriteNewPassword");
+  const isSubmitDisabled =
+    newPassword !== rewriteNewPassword || !newPassword || !rewriteNewPassword;
 
   return (
     <section className="flex min-h-screen items-center justify-center bg-[#030317] py-8">
@@ -154,9 +177,11 @@ const RegisterPage = () => {
                   </label>
                   <input
                     id="password"
-                    {...register("password")}
                     type="password"
                     placeholder="Password"
+                    {...register("password")}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className={`w-full p-3 bg-[#030317] border ${
                       errors.password ? "border-red-500" : "border-white/20"
                     } rounded-md focus:outline-none focus:border-indigo-500`}
@@ -164,6 +189,28 @@ const RegisterPage = () => {
                   {errors.password && (
                     <p className="text-red-500">
                       {errors.password.message?.toString()}
+                    </p>
+                  )}
+                </div>
+                <div className="mb-6">
+                  <label htmlFor="confirmPassword" className="block mb-2">
+                    Confirm Password
+                  </label>
+                  <input
+                    id="confirmPassword"
+                    type="password"
+                    placeholder="Confirm Password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className={`w-full p-3 bg-[#030317] border ${
+                      errors.confirmPassword
+                        ? "border-red-500"
+                        : "border-white/20"
+                    } rounded-md focus:outline-none focus:border-indigo-500`}
+                  />
+                  {errors.confirmPassword && (
+                    <p className="text-red-500">
+                      {errors.confirmPassword.message?.toString()}
                     </p>
                   )}
                 </div>
@@ -380,7 +427,13 @@ const RegisterPage = () => {
               <div className="mb-6">
                 <button
                   type="submit"
-                  className="w-full bg-indigo-600 text-white p-3 rounded-md hover:bg-indigo-700 transition-all duration-200"
+                  disabled={!isSubmitEnabled}
+                  data-tip="Password & Confirm password must match!"
+                  className={`w-full p-3 rounded-md transition-all duration-200 ${
+                    isSubmitEnabled
+                      ? "bg-indigo-600 text-white hover:bg-indigo-700"
+                      : "bg-gray-400 text-gray-700 cursor-not-allowed tooltip tooltip-warning"
+                  }`}
                 >
                   Create Account
                 </button>
