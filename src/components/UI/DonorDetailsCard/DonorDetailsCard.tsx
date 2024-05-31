@@ -1,8 +1,11 @@
+import useUserInfo from "@/hooks/useUserInfo";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 const DonorDetailsCard = ({ donor }: any) => {
+  const { userInfo } = useUserInfo();
+
+  // console.log(userInfo);
   return (
     <div
       key={donor?.id}
@@ -42,12 +45,21 @@ const DonorDetailsCard = ({ donor }: any) => {
           Address: {donor?.location} , {donor?.division} ,{donor?.address}
         </p>
         <div className="card-actions justify-end">
-          <Link
-            href={`/donor-list/${donor.id}`}
-            className="btn btn-accent text-gray-600"
-          >
-            See donor details
-          </Link>
+          {userInfo && userInfo?.id === donor?.id ? (
+            <Link
+              href={"/my-profile"}
+              className="text-xs text-cyan-500 underline"
+            >
+              Go to your profile
+            </Link>
+          ) : (
+            <Link
+              href={`/donor-list/${donor.id}`}
+              className="btn btn-accent text-gray-600"
+            >
+              See donor details
+            </Link>
+          )}
         </div>
       </div>
     </div>

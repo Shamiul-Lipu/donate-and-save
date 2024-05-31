@@ -1,5 +1,6 @@
 "use client";
 import RequestsTable from "@/components/Dashboard/Tables/RequestsTable";
+import Loader from "@/components/Shared/Loader";
 import { useGetAllRequestsQuery } from "@/redux/api/features/bloodDonationApi";
 
 const MyBloodRequestsPage = () => {
@@ -10,7 +11,11 @@ const MyBloodRequestsPage = () => {
   } = useGetAllRequestsQuery(undefined);
 
   if (isLoading || isFetching) {
-    return <div className="text-white">Loading</div>;
+    return (
+      <div className="text-white">
+        <Loader />
+      </div>
+    );
   }
 
   const transformedRequests = requests?.requestByMe?.map(

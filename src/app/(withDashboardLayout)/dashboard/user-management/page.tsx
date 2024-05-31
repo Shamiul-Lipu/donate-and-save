@@ -1,4 +1,5 @@
 "use client";
+import Loader from "@/components/Shared/Loader";
 import useUserInfo from "@/hooks/useUserInfo";
 import {
   useGetAllUserQuery,
@@ -52,7 +53,11 @@ const UserManagementPage = () => {
   };
 
   if (isLoading || isFetching) {
-    return <div className="text-white">Loading</div>;
+    return (
+      <div className="bg-neutral">
+        <Loader />
+      </div>
+    );
   }
 
   return (

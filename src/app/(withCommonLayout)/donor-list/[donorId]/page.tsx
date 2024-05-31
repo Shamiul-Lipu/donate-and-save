@@ -50,7 +50,7 @@ const DonorDetailsPage = ({ params }: { params: { donorId: string } }) => {
             Donors from the same location
           </h2>
           {donorsList && donorsList?.donors?.length > 0 ? (
-            <div>
+            <div className="py-5">
               <p className="text-gray-300 mb-4 text-center">
                 {donorsList.meta.total} donor(s) found from the same district
               </p>

@@ -3,19 +3,19 @@ import Container from "@/components/Shared/Container/Container";
 const SuccessStories = () => {
   const stories = [
     {
-      name: "John Doe",
+      name: "Fatema Islam",
       role: "Blood Donor",
       story:
         "Donating blood through this website was a breeze! The process was smooth, and the staff were very friendly. It feels great to know that I could potentially save someone's life.",
     },
     {
-      name: "Jane Smith",
+      name: "Mir Hassan",
       role: "Blood Recipient",
       story:
         "I am so grateful to the donors on this website. Their generosity and kindness saved my life. Words cannot express how thankful I am for their selfless act.",
     },
     {
-      name: "David Brown",
+      name: "Firoz ahmed",
       role: "Blood Donor",
       story:
         "I've been donating blood regularly through this website for years. It's a small effort that makes a big difference. Knowing that I'm helping others in need is incredibly rewarding.",
@@ -39,8 +39,8 @@ const SuccessStories = () => {
                 <h4 className="text-xl font-semibold text-cyan-400">
                   {story.name}
                 </h4>
-                <p className="text-gray-300">{story.role}</p>
-                <p className="mt-2 text-gray-300">{story.story}</p>
+                <p className="text-gray-300 text-sm">{story.role}</p>
+                <p className="mt-2 text-gray-300 text-base">{story.story}</p>
               </div>
             ))}
           </div>

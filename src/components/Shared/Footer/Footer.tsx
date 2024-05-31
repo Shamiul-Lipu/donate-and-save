@@ -5,9 +5,9 @@ import Container from "../Container/Container";
 
 const Footer = () => {
   return (
-    <footer className="bg-neutral text-white py-3">
+    <footer className="bg-gray-900 text-white py-3">
       <Container>
-        <footer className="footer p-10 bg-neutral text-gray-400 border-t-2 border-gray-300">
+        <footer className="footer p-10 bg-gray-900 text-gray-400 border-t-2 border-gray-300">
           <div>
             <h6 className="footer-title">Our Services</h6>
             <a className="link link-hover">Blood Donation</a>
