@@ -5,6 +5,8 @@ import bdMap from "@/assets/mapofbd.png";
 import Container from "@/components/Shared/Container/Container";
 import { useGetAllDonorsQuery } from "@/redux/api/features/bloodDonationApi";
 import { useState } from "react";
+import { motion } from "framer-motion";
+import { fromLeft, fromRight, hiddenToVisible } from "@/utils/animations";
 
 const CovarageArea = () => {
   const [location, setLocation] = useState("Dhaka");
@@ -37,8 +39,14 @@ const CovarageArea = () => {
             are the regions with available donors:
           </p>
         </div>
-        <div className="flex justify-between items-start gap-5 py-3">
-          <div className="">
+        <div className="flex justify-between items-start gap-5 py-3 overflow-hidden">
+          <motion.div
+            variants={fromLeft}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false }}
+            className="overflow-hidden"
+          >
             <ul className="p-3 rounded-md border-2 border-gray-600 bg-gray-800">
               {districts.map((district, i) => (
                 <li
@@ -54,15 +62,20 @@ const CovarageArea = () => {
                 </li>
               ))}
             </ul>
-          </div>
-          {isLoading && (
-            <span className="loading loading-ring loading-lg"></span>
-          )}
-          {!isLoading && data && (
-            <div className="mx-auto">
-              <h3 className="text-base font-medium mb-2">
-                Donors in {location}
-              </h3>
+          </motion.div>
+
+          <motion.div
+            variants={hiddenToVisible}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false }}
+            className="mx-auto overflow-hidden"
+          >
+            <h3 className="text-base font-medium mb-2">Donors in {location}</h3>
+            {isLoading && (
+              <span className="loading loading-ring loading-lg"></span>
+            )}
+            {!isLoading && data && (
               <ul>
                 {data?.donors?.map((donor: any, index: number) => (
                   <li
@@ -75,13 +88,26 @@ const CovarageArea = () => {
                   </li>
                 ))}
               </ul>
-            </div>
-          )}
-          <div className="mx-auto w-1/2">
+            )}
+          </motion.div>
+
+          <motion.div
+            variants={fromRight}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false }}
+            className="mx-auto w-1/2 overflow-hidden"
+          >
             <Image width={250} height={250} src={bdMap} alt="Bangladesh map" />
-          </div>
+          </motion.div>
         </div>
-        <div className="w-full border-4 border-green-800 rounded-xl">
+        <motion.div
+          variants={hiddenToVisible}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="w-full border-4 border-green-800 rounded-xl overflow-hidden"
+        >
           <Image
             width={3500}
             height={2500}
@@ -89,7 +115,7 @@ const CovarageArea = () => {
             alt="World map"
             className="rounded-lg w-full border-2 border-red-400"
           />
-        </div>
+        </motion.div>
       </Container>
     </div>
   );

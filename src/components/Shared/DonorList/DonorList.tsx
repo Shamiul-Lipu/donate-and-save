@@ -86,8 +86,11 @@ const DonorList = ({ cardLimit }: { cardLimit: number }) => {
         ) : (
           <div className="flex justify-center items-start py-8 gap-3">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-1">
-              {data?.donors?.map((donor) => (
-                <DonorDetailsCard key={donor.id} donor={donor} />
+              {data?.donors?.map((donor, index) => (
+                <DonorDetailsCard
+                  key={donor.id}
+                  donor={{ ...donor, delay: index * 0.3 }}
+                />
               ))}
             </div>
           </div>

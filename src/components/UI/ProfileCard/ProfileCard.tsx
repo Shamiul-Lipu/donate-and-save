@@ -11,7 +11,16 @@ const ProfileCard = ({ user, requestButton }: any) => {
   } = useGetAllRequestsQuery(undefined);
 
   if (isLoading || isFetching) {
-    return <div className="text-white">Loading</div>;
+    return (
+      <div className="h-screen bg-neutral w-full flex justify-center items-center overflow-hidden">
+        <div className="flex flex-col gap-4 w-52">
+          <div className="skeleton h-52 w-full"></div>
+          <div className="skeleton h-4 w-28"></div>
+          <div className="skeleton h-4 w-full"></div>
+          <div className="skeleton h-4 w-full"></div>
+        </div>
+      </div>
+    );
   }
 
   const filteredRequests = requests?.requestByMe?.filter(

@@ -21,6 +21,9 @@ export const loginUser = async (data: any) => {
     setAccessToken(userInfo.data.accessToken, {
       redirect: "/",
     });
+    // setAccessToken(userInfo.data.refreshToken, {
+    //   redirect: "/",
+    // });
   }
 
   return userInfo;

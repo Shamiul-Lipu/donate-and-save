@@ -1,13 +1,22 @@
 import useUserInfo from "@/hooks/useUserInfo";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const DonorDetailsCard = ({ donor }: any) => {
   const { userInfo } = useUserInfo();
 
   // console.log(userInfo);
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{
+        delay: donor.delay,
+        duration: 0.5,
+        ease: "easeOut",
+      }}
+      viewport={{ once: true }}
       key={donor?.id}
       className="card w-96 bg-gradient-to-b from-slate-600 to-gray-800 shadow-xl text-gray-100"
     >
@@ -62,7 +71,7 @@ const DonorDetailsCard = ({ donor }: any) => {
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

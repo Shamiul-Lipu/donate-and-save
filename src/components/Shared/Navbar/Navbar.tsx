@@ -9,6 +9,8 @@ import useUserInfo from "@/hooks/useUserInfo";
 import { useRouter } from "next/navigation";
 import { logoutUser } from "@/services/actions/logoutUser";
 import userIcon from "@/assets/user.png";
+import { motion } from "framer-motion";
+import { navbarAnimation } from "@/utils/animations";
 
 const Navbar = () => {
   const { userInfo, setUserInfo } = useUserInfo();
@@ -22,7 +24,12 @@ const Navbar = () => {
   return (
     <header className="bg-neutral">
       <Container>
-        <nav className="navbar bg-neutral text-neutral-content py-5">
+        <motion.nav
+          variants={navbarAnimation}
+          initial="hidden"
+          animate="visible"
+          className="navbar bg-neutral text-neutral-content py-5"
+        >
           <div className="navbar-start">
             <Link href="/" className="btn btn-ghost text-xl">
               <Image src={bloodDlogo} width={50} height={50} alt="logo" />
@@ -114,7 +121,7 @@ const Navbar = () => {
               </div>
             )}
           </div>
-        </nav>
+        </motion.nav>
       </Container>
     </header>
   );

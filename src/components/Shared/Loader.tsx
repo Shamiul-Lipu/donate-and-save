@@ -3,7 +3,7 @@ import loaderImage from "@/assets/loader.gif";
 
 const Loader = () => {
   return (
-    <div className="flex justify-center items-center h-screen w-full ">
+    <div className="bg-neutral flex justify-center items-center h-screen w-full ">
       <div>
         <Image
           width={200}

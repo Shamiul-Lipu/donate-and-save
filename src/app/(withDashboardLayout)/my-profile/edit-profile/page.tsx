@@ -103,6 +103,8 @@ const EditProfileForm = () => {
     );
   }
 
+  // console.log(user.division);
+
   return (
     <div className="bg-black min-h-screen text-gray-300">
       <ProfileCard user={user} requestButton={false} />
@@ -223,24 +225,33 @@ const EditProfileForm = () => {
                 </p>
               )}
             </div>
-            <div className="mb-6">
+            <div
+              className="mb-6 tooltip  tooltip-info"
+              data-tip={
+                "If you want to change the division, change the location first.\nIf it's the same location but a different division, select another location, then select your preferred location and division."
+              }
+            >
               <label htmlFor="division" className="block mb-2">
                 Division
               </label>
-              <select
-                id="division"
-                {...register("division")}
-                className={`w-full p-3 bg-[#030317] border ${
-                  errors.division ? "border-red-500" : "border-white/20"
-                } rounded-md focus:outline-none focus:border-indigo-500`}
-              >
-                <option value="">Select Division</option>
-                {divisions.map((division) => (
-                  <option key={division} value={division}>
-                    {division}
-                  </option>
-                ))}
-              </select>
+              {user && (
+                <select
+                  id="division"
+                  {...register("division")}
+                  defaultValue={user?.division}
+                  className={`w-full p-3 bg-[#030317] border ${
+                    errors.division ? "border-red-500" : "border-white/20"
+                  } rounded-md focus:outline-none focus:border-indigo-500`}
+                >
+                  <option value="">{user?.division}</option>
+                  {user &&
+                    divisions.map((division) => (
+                      <option key={division} value={division}>
+                        {division}
+                      </option>
+                    ))}
+                </select>
+              )}
               {errors.division && (
                 <p className="text-red-500">
                   {errors.division.message?.toString()}

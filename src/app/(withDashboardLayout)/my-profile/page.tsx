@@ -36,6 +36,12 @@ const MyProfileDetails = () => {
           </p>
           <div className="card-actions justify-end">
             <Link
+              href={`/my-profile/change-password`}
+              className="btn btn-accent btn-outline text-gray-600"
+            >
+              Change Password
+            </Link>
+            <Link
               href={`/my-profile/edit-profile`}
               className="btn btn-accent text-gray-600"
             >
